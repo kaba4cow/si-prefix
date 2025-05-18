@@ -3,9 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.kaba4cow</groupId>
 	<artifactId>si-prefix</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<name>SI Prefix</name>
-	<description>A single-class library providing parsing, formatting, and comparison tools for values with SI unit prefixes</description>
+	<description>A Java library for handling SI unit prefixes, providing tools for parsing, formatting, and comparing values
+		with SI prefixes. Features the SIPrefix enum and SIDecimal class for seamless integration with BigDecimal operations.</description>
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>
 		<maven.compiler.target>8</maven.compiler.target>

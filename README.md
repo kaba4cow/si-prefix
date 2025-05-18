@@ -16,6 +16,7 @@ The SI Prefix library simplifies working with SI unit prefixes ranging from quec
 - Supports all standard SI prefixes
 - High precision calculations using `BigDecimal`
 - Simple API for common operations
+- `SIDecimal` class that extends `BigDecimal` with SI prefix functionality
 
 ## Installation
 
@@ -29,11 +30,11 @@ mvn clean install
 
 Add to your `pom.xml`:
 
-```
-xml<dependency>
+```xml
+<dependency>
     <groupId>com.kaba4cow</groupId>
     <artifactId>si-prefix</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
@@ -51,7 +52,7 @@ BigDecimal value = SIPrefix.parseValue("2.5k");  // Returns 2500
 
 // Normalize values with appropriate SI prefixes
 String normalized = SIPrefix.normalizeValue("2500");  // Returns "2.5k"
-String normalized2 = SIPrefix.normalizeValue("0.000072");  // Returns "72μ"
+String normalized2 = SIPrefix.normalizeValue("0.000072");  // Returns "72u"
 
 // Compare values with different prefixes
 boolean equal = SIPrefix.valuesEqual("1M", "1000k");  // Returns true
@@ -72,6 +73,33 @@ int exponent = kilo.getExponent();  // Returns 3
 
 // Get the multiplier
 BigDecimal multiplier = kilo.getMultiplier();  // Returns 1000
+```
+
+### Using SIDecimal Class
+
+The `SIDecimal` class extends Java's `BigDecimal` to provide all standard numeric operations while adding support for SI prefixes in string representation.
+
+```java
+// Create an SIDecimal from a string with SI prefix
+SIDecimal value1 = new SIDecimal("2.5k");  // Equivalent to 2500
+SIDecimal value2 = new SIDecimal("1.7M");  // Equivalent to 1700000
+
+// Perform arithmetic operations
+SIDecimal sum = value1.add(value2);        // 1702500
+SIDecimal product = value1.multiply(value2); // 4250000000
+
+// Auto-formatting with appropriate SI prefixes
+System.out.println(value1);      // Outputs: "2.5k"
+System.out.println(value2);      // Outputs: "1.7M" 
+System.out.println(sum);         // Outputs: "1.7025M"
+System.out.println(product);     // Outputs: "4.25G"
+
+// Get the underlying scaled value and prefix
+SIPrefix prefix = value1.getPrefix();              // Returns SIPrefix.KILO
+BigDecimal scaledValue = value1.getScaledValue();  // Returns 2.5
+
+// Format with specific precision
+String formatted = value1.toString(2, RoundingMode.HALF_UP);  // "2.50k"
 ```
 
 ### Parsing SI Prefixes

@@ -150,7 +150,7 @@ public enum SIPrefix {
 	}
 
 	/**
-	 * Returns the multiplier represented by this prefix as a {@code BigDecimal}.
+	 * Returns the multiplier represented by this prefix as a {@link BigDecimal}.
 	 *
 	 * @return the multiplier
 	 */
